@@ -173,29 +173,31 @@
       border: 2px solid rgba(0, 0, 0, 0.3);
       background: white;
       padding: 20px 20px; 
-      /*! bottom: 5px; */
       }
+
       #output_image {
       width: inherit;
       }
+
       .fileinput{
         color: red;
-      }
-      .custom-file-input ~ .custom-file-label::after {
-      content: "Elegir";
       }
 
       .edu-uploadbutton{
         content: "Escolher Arquivo";
-      background-color: #e75a24;
-      border-color: #e75a24;
+        background-color: #e75a24;
+        border-color: #e75a24;
+        color: white;
+        background: #e75a24 url("img/pdf.svg") no-repeat fixed; 
       }
 
-      /* .custom-file-input:lang(en) ~ .custom-file-label::after {
-      content: "Escolher Arquivo";
-      background-color: #e75a24;
-      border-color: #e75a24;
-      } */
+      .edu-uploaddoc {
+        padding-left: 9rem;
+      }
+
+      .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: none;
+      }
 
       /* Extra small devices (portrait phones, less than 576px) */
       /* No media query since this is the default in Bootstrap */
@@ -279,7 +281,6 @@
                     <!-- Tab "Content" -->
                     <div id="home" class="container tab-pane active col-12">
                       
-                      
                       <div style="display: flex;" >
                           <!-- Drag & Drop -->
                           <div id="drapgrop" class="dropzone col-6"></div>
@@ -290,27 +291,43 @@
 
                             <!-- Upload Document -->
 
-                            <!-- 1 -->
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary edu-uploadbutton" type="button">Button</button>
-                              </div>
+                            <!-- 3 -->
+                            <div class="form-group">
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile03">
-                                <label class="custom-file-label" for="inputGroupFile03">O arquivo deve ser .pdf</label>
+                                <input type="file" name="files[]" multiple class="custom-file-input" id="customFile" style="opacity: 0;">
+                                <label class="custom-file-label edu-uploaddoc" for="customFile">O arquivo deve ser .pdf</label>
+                                <button class="custom-file-label edu-uploadbutton" for="customFile">Escolher arquivo</button>
                               </div>
                             </div>
-                            <!-- 2 -->
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary edu-uploadbutton" type="button">Escolher Arquivo</button>
-                              </div>
-                              
-                              <input type="file" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" >
-                                
-                            </div>
-                          
+
+                            <!-- 1 -->
+                            <!-- <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-outline-secondary edu-uploadbutton" type="button">Button</button>
+                                </div>
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="inputGroupFile03">
+                                  <label class="custom-file-label" for="inputGroupFile03">
+                                    <input type="file" class="form-control" placeholder="" aria-describedby="basic-addon1" style="opacity: 0;">
+                                  </label>
+                                </div>
+                              </div> -->
+                              <!-- 2 -->
+                              <!-- <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-outline-secondary edu-uploadbutton" type="button">Escolher Arquivo</button>
+                                  <input type="file" class="form-control" placeholder="" aria-describedby="basic-addon1" style="opacity: 0;">
+                                </div>
+                              </div> -->
+                            <!-- 4 -->
+                            <!-- <label for="file-upload" class="custom-file-upload">
+                                <input type="file" id="upload" style="opacity: 0;">
+                            </label>
+                            <input type="file" id="upload" >
+                          <input type="file"> -->
+
                           </div>
+                          
                         
                       </div>
                       
@@ -394,7 +411,7 @@
         autorDuplicate.appendChild(autor);
       }
 
-      $("div#drapdrop").dropzone({ url: "/file/post" });
+      $("div#dragdrop").dropzone({ url: "/file/post" });
 
 
       $(document).ready(function() {
