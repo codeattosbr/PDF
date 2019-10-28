@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Conteúdo em texto</title>
+    <title>CRUD PDF</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -173,6 +173,7 @@
       border: 2px solid rgba(0, 0, 0, 0.3);
       background: white;
       padding: 20px 20px; 
+
       }
 
       #output_image {
@@ -203,6 +204,21 @@
         width: 20px;
         margin-top: -3px;
         margin-right: 7px;
+      }
+
+      #dragdrop {
+       display: flex;
+       background: url(img/imageupload.svg) no-repeat center;
+      }
+
+      #dragdrop>div>span {
+        display: none;
+      }
+
+      #dragdrop>img {
+        
+        height: 20rem;
+        margin: auto;
       }
 
       /* Extra small devices (portrait phones, less than 576px) */
@@ -289,7 +305,9 @@
                       
                       <div style="display: flex;" >
                           <!-- Drag & Drop -->
-                          <div id="drapgrop" class="dropzone col-6"></div>
+                          <div id="dragdrop" class="dropzone col-6">
+                              <!-- <img src="img/imageupload.svg" class="" alt=""> -->
+                          </div>
                           
                           <div id="wrapper" class="col-6">
 
@@ -297,7 +315,6 @@
 
                             <!-- Upload Document -->
 
-                            <!-- 3 -->
                             <div class="form-group">
                               <div class="custom-file">
                                 <input type="file" name="files[]" multiple class="custom-file-input" id="customFile" style="opacity: 0;">
@@ -391,7 +408,6 @@
       }
 
       $("div#dragdrop").dropzone({ url: "/file/post" });
-
 
       $(document).ready(function() {
         $('input[type="file"]').on("change", function() {
