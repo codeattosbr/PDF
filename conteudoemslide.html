@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CRUD PDF</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css" />
+    <script type="text/javascript" src="js/dropzone.js"></script>
+    <style>
+      body {
+        background-color: red;
+      }
+      .modal {
+        background-color: #354353;
+      }
+      .modal-header {
+        justify-content: center;
+      }
+      .modal-content {
+        min-height: 80%;
+      }
+
+      .modal-content.col-12 {
+        min-height: 90vh;
+      }
+
+      .modal-body {
+        max-height: calc(100% - 71px);
+        overflow: auto;
+        min-height: 100%;
+      }
+
+      .modal-content.col-12 {
+        max-height: 90vh;
+        overflow: hidden;
+      }
+
+      .edutabs {
+        border: 0px;
+        justify-content: space-around;
+      }
+      .nav-link:hover,
+      .nav-link.active,
+      .nav-tabs .nav-link {
+        border: 0;
+      }
+      .edumodal-width {
+        max-width: 85%;
+      }
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+        color: #e75a24;
+        border-bottom: 4px solid #e75a24;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link {
+        color: #979797;
+      }
+
+      .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #e75a24;
+        background-color: #e75a24;
+      }
+
+      .edufont-color {
+        color: #e75a24;
+        font: Bold 20px Roboto;
+      }
+
+      .eduborder-color {
+        color: #e75a24;
+        border: 1px solid #e75a24;
+        box-shadow: 0;
+      }
+
+      .modal-footer {
+        justify-content: space-between;
+      }
+
+      .delButton {
+        flex: 0 0 20.667%;
+      }
+      .addButton {
+        flex: 0 0 20.667%;
+      }
+
+      .addButton-autor {
+        margin-bottom: 4rem;
+      }
+
+      .btn-outline-warning {
+        background: white;
+        color: #e75a24;
+        border-color: #e75a24;
+      }
+
+      .btn-outline-warning:hover {
+        background: #e75a24 0% 0% no-repeat padding-box;
+        color: white;
+        border-color: #e75a24;
+      }
+
+      .btn-outline-warning:not(:disabled):not(.disabled).active,
+      .btn-outline-warning:not(:disabled):not(.disabled):active,
+      .show > .btn-outline-warning.dropdown-toggle {
+        background-color: #e75a24;
+        border-color: #e75a24;
+      }
+
+       .edu-form:focus {
+        color: #495057;
+        border-color: #979797;
+        box-shadow: 0 0 0 #979797;
+      }
+
+      input.form-control:nth-child(1) {
+        margin-bottom: 1rem;
+      }
+
+      textarea.form-control {
+        min-height: 100%;
+      }
+
+      .sndbox {
+        font: Bold 25px/38px Roboto;
+        font-size: 25px;
+        border: 0px;
+      }
+
+      .form-group .eduRoboto {
+        font: Medium 20px/40px Roboto;
+      }
+
+      .eduheader {
+        border-bottom: 0px;
+      }
+
+      .eduinfobox {
+        padding-bottom: 5.375rem;
+        min-height: 90px;
+      }
+
+      .edutab-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      #home {
+        min-height: 100%;
+      }
+
+      .edutextareabox {
+        height: 100%;
+      }
+
+      .edu-tabcontent {
+        display: flex;
+      }
+      
+      #eduupload {
+        justify-content: center;
+        display: flex;
+      }
+
+      .dropzone {
+      min-height: 330px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      background: white;
+      padding: 20px 20px; 
+
+      }
+
+      #output_image {
+      width: inherit;
+      }
+
+      .fileinput{
+        color: red;
+      }
+
+      .edu-uploadbutton{
+        content: "Escolher Arquivo";
+        background-color: #e75a24;
+        border-color: #e75a24;
+        color: white;
+      }
+
+      .edu-uploaddoc {
+        padding-left: 11rem;
+        border: 0px;
+      }
+
+      .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: none;
+      }
+
+      .edu-update-icon {
+        width: 20px;
+        margin-top: -3px;
+        margin-right: 7px;
+      }
+
+      #dragdrop {
+       display: flex;
+       background: url(img/imageupload.svg) no-repeat center;
+      }
+
+      #dragdrop>div>span {
+        display: none;
+      }
+
+      #dragdrop>img {
+        
+        height: 20rem;
+        margin: auto;
+      }
+
+      /* Extra small devices (portrait phones, less than 576px) */
+      /* No media query since this is the default in Bootstrap */
+
+      /* Small devices (landscape phones, 576px and up) */
+      @media (min-width: 576px) {
+      }
+      @media (min-height: 576px) {
+      }
+
+      /* Medium devices (tablets, 768px and up) */
+      @media (min-width: 768px) {
+        .edutabinfobox {
+          padding: 0 20px;
+        }
+      }
+
+      /* Large devices (desktops, 992px and up) */
+      @media (min-width: 992px) {
+      }
+
+      /* Extra large devices (large desktops, 1200px and up) */
+      @media (min-width: 1200px) {
+        .edutabinfobox {
+          padding: 0 80px;
+        }
+      }
+      @media (min-height: 800px){
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Botão</h2>
+      <!-- Button to Open the Modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#myModal"
+      >
+        Open modal
+      </button>
+
+      <!-- The Modal -->
+      <div class="row">
+        <form>
+          <div class="modal" id="myModal">
+            <div class="modal-dialog edumodal-width">
+              <div class="modal-content col-12">
+                <!-- Modal Header -->
+                <div class="row">
+                  <div class="col modal-header eduheader">
+                    <!-- Nav tabs -->
+
+                    <ul class="nav nav-tabs edutabs col-6">
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active edutab-padding"
+                          data-toggle="tab"
+                          href="#home"
+                          >Conteúdo</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link edutab-padding"
+                          data-toggle="tab"
+                          href="#menu1"
+                          >Informações</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Modal body -->
+                <!-- Tab panes -->
+                <div class="modal-body">
+                 <div class="tab-content edutextareabox">
+                    <!-- Tab "Content" -->
+                    <div id="home" class="container tab-pane active col-12">
+                      
+                      <div class="edu-tabcontent">
+                          <!-- Drag & Drop -->
+                          <div id="dragdrop" class="dropzone col-6">
+                              <!-- <img src="img/imageupload.svg" class="" alt=""> -->
+                          </div>
+                          
+                          <div id="wrapper" class="col-6">
+
+                            <input type="text" class="form-control sndbox" placeholder="Digite aqui o título do Slide" name="title" />
+
+                            <!-- Upload Document -->
+
+                            <div class="form-group">
+                              <div class="custom-file">
+                                <input type="file" name="files[]" multiple class="custom-file-input" id="customFile" style="opacity: 0;">
+                                <label class="custom-file-label edu-uploaddoc" for="customFile">O arquivo deve ser .ppt</label>
+                                <button class="custom-file-label edu-uploadbutton" for="customFile">
+                                  <img src="img/pdf.svg" class="edu-update-icon" alt="">
+                                  Escolher arquivo</button>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      
+                    </div>
+                    <!-- Tab "Info" -->
+                    <div id="menu1" class="container tab-pane fade col-12 edutabinfobox">
+                      <br />
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="customControlValidation1"
+                        />
+                        <label
+                          class="custom-control-label edufont-color"
+                          for="customControlValidation1"
+                          >CONTEÚDO OBRIGATÓRIO</label
+                        >
+                        <div class="invalid-feedback">
+                          Example invalid feedback text
+                        </div>
+                      </div>
+
+                      <div class="form-group edu-form">
+                        <label class="eduRoboto">DESCRIÇÃO CURTA</label>
+                        <input type="text" class="form-control eduinfobox" />
+                      </div>
+                      <div class="form-group edu-form">
+                        <label class="eduRoboto">FONTE</label>
+                        <input type="text" class="form-control eduinfobox" />
+                      </div>
+                      <div class="form-group edu-form" id="duplicater">
+                        <label class="eduRoboto">AUTOR</label>
+                        <input type="text" class="form-control" />
+                      </div>
+
+                      <div id="autorDuplicate"></div>
+
+                      <button
+                        type="button"
+                        class="btn btn-outline-warning eduborder-color addButton-autor"
+                        onclick="duplicate()"
+                      >
+                        + ADICIONAR NOVA OPÇÃO DE AUTOR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning eduborder-color delButton"
+                  >
+                    Excluir
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning eduborder-color addButton"
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      var i = 0;
+      var original = document.getElementById("duplicater");
+      var clone = original.cloneNode(true);
+
+      function duplicate() {
+        var autor = clone.cloneNode(true);
+        autor.id = "duplicater" + ++i;
+        // or clone.id = ""; if the divs don't need an ID
+        var autorDuplicate = document.getElementById("autorDuplicate");
+        autorDuplicate.appendChild(autor);
+      }
+
+      $("div#dragdrop").dropzone({ url: "/file/post" });
+
+      $(document).ready(function() {
+        $('input[type="file"]').on("change", function() {
+          let filenames = [];
+          let files = document.getElementById("customFile").files;
+          if (files.length > 1) {
+            filenames.push("Total Files (" + files.length + ")");
+          } else {
+            for (let i in files) {
+              if (files.hasOwnProperty(i)) {
+                filenames.push(files[i].name);
+              }
+            }
+          }
+          $(this)
+            .next(".custom-file-label")
+            .html(filenames.join(","));
+        });
+      });
+
+
+    </script>
+  </body>
+</html>
