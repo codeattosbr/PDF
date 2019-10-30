@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CRUD PDF</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css" />
+    <script type="text/javascript" src="js/dropzone.js"></script>
+    <style>
+
+      /* RESET BS4 */
+      .form-control:focus {
+        border-color: rgb(206, 212, 218);
+        box-shadow: none;
+      }
+
+      .btn-outline-warning {
+        background: white;
+        color: #e75a24;
+        border-color: #e75a24;
+      }
+
+      .btn-outline-warning:hover {
+        background: #e75a24 0% 0% no-repeat padding-box;
+        color: white;
+        border-color: #e75a24;
+      }
+      .btn-outline-warning:not(:disabled):not(.disabled).active,
+      .btn-outline-warning:not(:disabled):not(.disabled):active,
+      .show > .btn-outline-warning.dropdown-toggle {
+        background-color: #e75a24;
+        border-color: #e75a24;
+      }
+      .btn-outline-warning.focus, .btn-outline-warning:focus {
+        box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.5);
+      }
+      /* END RESET */
+
+      body {
+        background-color: red;
+      }
+      .modal {
+        background-color: #354353;
+      }
+      .modal-header {
+        justify-content: center;
+      }
+      .modal-content {
+        min-height: 80%;
+      }
+
+      .modal-content.col-12 {
+        min-height: 90vh;
+      }
+
+      .modal-body {
+        max-height: calc(100% - 71px);
+        overflow: auto;
+        min-height: 100%;
+      }
+
+      .modal-content.col-12 {
+        max-height: 90vh;
+        overflow: hidden;
+      }
+
+      .edutabs {
+        border: 0px;
+        justify-content: space-around;
+      }
+      .nav-link:hover,
+      .nav-link.active,
+      .nav-tabs .nav-link {
+        border: 0;
+      }
+      .edumodal-width {
+        max-width: 85%;
+      }
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+        color: #e75a24;
+        border-bottom: 4px solid #e75a24;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link {
+        color: #979797;
+      }
+
+      .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #e75a24;
+        background-color: #e75a24;
+      }
+
+      .edufont-color {
+        color: #e75a24;
+        font: Bold 20px Roboto;
+      }
+
+      .eduborder-color {
+        color: #e75a24;
+        border: 1px solid #e75a24;
+        box-shadow: 0;
+      }
+
+      .modal-footer {
+        justify-content: space-between;
+      }
+
+      .delButton {
+        flex: 0 0 20.667%;
+      }
+      .addButton {
+        flex: 0 0 20.667%;
+      }
+
+      .addButton-docup {
+        position: absolute;
+        bottom: 0px;
+        z-index: 2;
+        margin-bottom: 33px;
+        margin-left: -88rem;
+      }
+
+       .edu-form:focus {
+        color: #495057;
+        border-color: #979797;
+        box-shadow: 0 0 0 #979797;
+      }
+
+      input.form-control:nth-child(1) {
+        margin-bottom: 1rem;
+      }
+
+      textarea.form-control {
+        min-height: 100%;
+      }
+
+      .sndbox {
+        font: Bold 25px/38px Roboto;
+        font-size: 25px;
+        border: 0px;
+        padding-left: 0px;
+      }
+      .sndbox:focus {
+        box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0);
+      }
+      .sndbox-desc {
+        margin-bottom: 1rem;
+        border: 0px;
+        padding-left: 0px;
+        font-size: 16px;
+      }
+      .sndbox-desc:focus {
+        border: 0px;
+        box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0);
+      }
+      
+      .form-group .eduRoboto {
+        font: Medium 20px/40px Roboto;
+      }
+
+      .eduheader {
+        border-bottom: 0px;
+      }
+
+      .eduinfobox {
+        padding-bottom: 5.375rem;
+        min-height: 90px;
+      }
+
+      .edutab-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      #home {
+        min-height: 100%;
+      }
+
+      .edutextareabox {
+        height: 100%;
+      }
+
+      .edu-tabcontent {
+        display: flex;
+      }
+
+      #eduupload {
+        justify-content: center;
+        display: flex;
+      }
+
+      .dropzone {
+      min-height: 330px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      background: white;
+      padding: 20px 20px; 
+      }
+
+      #output_image {
+      width: inherit;
+      }
+
+      .fileinput{
+        color: red;
+      }
+
+      .edu-inputcity{
+        opacity: 0;
+      }
+
+      .edu-uploadbutton{
+        content: "Escolher Arquivo";
+        background-color: #e75a24;
+        border-color: #e75a24;
+        color: white;
+      }
+
+      .edu-uploaddoc {
+        padding-left: 11rem;
+        border: 0px;
+      }
+
+      .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: none;
+      }
+
+      .edu-update-icon {
+        width: 20px;
+        margin-top: -3px;
+        margin-right: 7px;
+      }
+
+      #dragdrop {
+       display: flex;
+       background: url(img/imageupload.svg) no-repeat center;
+      }
+
+      #dragdrop>div>span {
+        display: none;
+      }
+
+      #dragdrop>img {
+        height: 20rem;
+        margin: auto;
+      }
+
+      .edu-dupbutton {
+        border-radius: 20px;
+        /* margin-left: 27rem; */
+        /* margin-top: -2rem; */
+      }
+
+      .edu-uploadbox {
+        display: flex;
+        padding-left: 0px;
+        /* position: absolute; */
+        /* bottom: 0px; */
+      }
+      .edu-docinput {
+        padding-right: 0px;
+      }
+
+      #updocDuplicate {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .duplicater {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .edu-docupbutton {
+        padding-left: 0px;
+      }
+
+      /* Extra small devices (portrait phones, less than 576px) */
+      /* No media query since this is the default in Bootstrap */
+
+      /* Small devices (landscape phones, 576px and up) */
+      @media (min-width: 576px) {
+      }
+      @media (min-height: 576px) {
+      }
+
+      /* Medium devices (tablets, 768px and up) */
+      @media (min-width: 768px) {
+        .edutabinfobox {
+          padding: 0 20px;
+        }
+      }
+
+      /* Large devices (desktops, 992px and up) */
+      @media (min-width: 992px) {
+      }
+
+      /* Extra large devices (large desktops, 1200px and up) */
+      @media (min-width: 1200px) {
+        .edutabinfobox {
+          padding: 0 80px;
+        }
+      }
+      @media (min-height: 800px){
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Botão</h2>
+      <!-- Button to Open the Modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#myModal"
+      >
+        Open modal
+      </button>
+
+      <!-- The Modal -->
+      <div class="row">
+        <form>
+          <div class="modal" id="myModal">
+            <div class="modal-dialog edumodal-width">
+              <div class="modal-content col-12">
+                <!-- Modal Header -->
+                <div class="row">
+                  <div class="col modal-header eduheader">
+                    <!-- Nav tabs -->
+
+                    <ul class="nav nav-tabs edutabs col-6">
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active edutab-padding"
+                          data-toggle="tab"
+                          href="#home"
+                          >Conteúdo</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link edutab-padding"
+                          data-toggle="tab"
+                          href="#menu1"
+                          >Informações</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Modal body -->
+                <!-- Tab panes -->
+                <div class="modal-body">
+                 <div class="tab-content edutextareabox">
+                    <!-- Tab "Content" -->
+                    <div id="home" class="container tab-pane active col-12">
+                      <div class="edu-tabcontent" >
+                          <div id="wrapper" class="col-12">
+                            <input type="text" class="form-control sndbox" placeholder="Título do Upload" name="title" />
+                            
+                              <div class="col-12" class="duplicater" id="duplicater">
+                                <input type="text" class="form-control sndbox-desc col-12" placeholder="Descrição breve o arquivo disponibilizado ao aluno...">
+                                <!-- Upload Document -->
+                                <div class="wrapper edu-docupbutton col-12">
+                                  <div class="form-group edu-docinput">
+                                    <div class="custom-file">
+                                      <input type="file" name="files[]" multiple class="custom-file-input edu-inputcity" id="customFile">
+                                      <label class="custom-file-label edu-uploaddoc" for="customFile"></label>
+                                      <button class="custom-file-label edu-uploadbutton" for="customFile">
+                                        <img src="img/pdf.svg" class="edu-update-icon" alt="">
+                                        Escolher arquivo</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <hr>
+                              </div>
+                            
+
+                            <div class="edu-uploadbox col-12">
+                              <div class="col-12" id="updocDuplicate"></div>
+                              <div class="col"><button
+                                type="button"
+                                class="btn btn-outline-warning eduborder-color addButton-docup edu-dupbutton"
+                                onclick="duplicate()"
+                              >
+                              + 
+                              </button></div>
+                            </div>
+                            
+                          </div>
+                      </div>
+                      
+                    </div>
+                    <!-- Tab "Info" -->
+                    <div id="menu1" class="container tab-pane fade col-12 edutabinfobox">
+                      
+                    </div>
+
+                  </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning eduborder-color delButton"
+                  >
+                    Excluir
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning eduborder-color addButton"
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+
+      var i = 0;
+      var original = document.getElementById("duplicater");
+      var clone = original.cloneNode(true);
+
+      function duplicate() {
+        var autor = clone.cloneNode(true);
+        autor.id = "duplicater" + ++i;
+        // clone.id = "duplicater" + ++i;
+        // or clone.id = ""; if the divs don't need an ID
+        var updocDuplicate = document.getElementById("updocDuplicate");
+        updocDuplicate.appendChild(autor);
+      }
+
+      $(document).ready(function() {
+        $('input[type="file"]').on("change", function() {
+          let filenames = [];
+          let files = document.getElementById("customFile").files;
+          if (files.length > 2) {
+            filenames.push("Total Files (" + files.length + ")");
+          } else {
+            for (let i in files) {
+              if (files.hasOwnProperty(i)) {
+                filenames.push(files[i].name);
+              }
+            }
+          }
+          $(this)
+            .next(".custom-file-label")
+            .html(filenames.join(","));
+        });
+      });
+
+      $("div#dragdrop").dropzone({ url: "/file/post" });
+    </script>
+  </body>
+</html>
