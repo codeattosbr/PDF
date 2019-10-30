@@ -13,6 +13,51 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./path/to/dropzone.js"></script>
     <style>
+
+
+      .edu-buttonstyle {
+        background: white;
+        color: #e75a24;
+        border-color: #e75a24;
+      }
+
+      .edu-buttonstyle:hover {
+        background: #e75a24 0% 0% no-repeat padding-box;
+        color: white;
+        border-color: #e75a24;
+      }
+
+      .edu-buttonstyle:not(:disabled):not(.disabled).active,
+      .edu-buttonstyle:not(:disabled):not(.disabled):active,
+      .show > .edu-buttonstyle.dropdown-toggle {
+        background-color: #e75a24;
+        border-color: #e75a24;
+      }
+
+      .edu-navtabs.nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+        color: #e75a24;
+        border-bottom: 4px solid #e75a24;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .edu-navtabs.nav-link:hover,
+      .nav-link.active,
+      .nav-tabs .nav-link {
+        border: 0;
+      }
+
+      .edu-navtabs.nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link {
+        color: #979797;
+      }
+      
+      .edu-labelbox.custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #e75a24;
+        background-color: #e75a24;
+      }
+
       body {
         background-color: red;
       }
@@ -45,32 +90,11 @@
         border: 0px;
         justify-content: space-around;
       }
-      .nav-link:hover,
-      .nav-link.active,
-      .nav-tabs .nav-link {
-        border: 0;
-      }
+      
       .edumodal-width {
         max-width: 85%;
       }
-      .nav-tabs .nav-item.show .nav-link,
-      .nav-tabs .nav-link.active {
-        color: #e75a24;
-        border-bottom: 4px solid #e75a24;
-        padding-left: 0px;
-        padding-right: 0px;
-      }
-
-      .nav-tabs .nav-item.show .nav-link,
-      .nav-tabs .nav-link {
-        color: #979797;
-      }
-
-      .custom-control-input:checked ~ .custom-control-label::before {
-        border-color: #e75a24;
-        background-color: #e75a24;
-      }
-
+      
       .edufont-color {
         color: #e75a24;
         font: Bold 20px Roboto;
@@ -79,7 +103,6 @@
       .eduborder-color {
         color: #e75a24;
         border: 1px solid #e75a24;
-        box-shadow: 0;
       }
 
       .modal-footer {
@@ -97,26 +120,7 @@
         margin-bottom: 4rem;
       }
 
-      .btn-outline-warning {
-        background: white;
-        color: #e75a24;
-        border-color: #e75a24;
-      }
-
-      .btn-outline-warning:hover {
-        background: #e75a24 0% 0% no-repeat padding-box;
-        color: white;
-        border-color: #e75a24;
-      }
-
-      .btn-outline-warning:not(:disabled):not(.disabled).active,
-      .btn-outline-warning:not(:disabled):not(.disabled):active,
-      .show > .btn-outline-warning.dropdown-toggle {
-        background-color: #e75a24;
-        border-color: #e75a24;
-      }
-
-       .edu-form:focus {
+      .edu-form:focus {
         color: #495057;
         border-color: #979797;
         box-shadow: 0 0 0 #979797;
@@ -228,7 +232,7 @@
                   <div class="col modal-header eduheader">
                     <!-- Nav tabs -->
 
-                    <ul class="nav nav-tabs edutabs col-6">
+                    <ul class="nav nav-tabs edu-navtabs edutabs col-6">
                       <li class="nav-item">
                         <a
                           class="nav-link active edutab-padding"
@@ -280,7 +284,7 @@
                       <div class="custom-control custom-checkbox mb-3">
                         <input
                           type="checkbox"
-                          class="custom-control-input"
+                          class="custom-control-input .edu-labelbox"
                           id="customControlValidation1"
                         />
                         <label
@@ -306,7 +310,7 @@
 
                       <button
                         type="button"
-                        class="btn btn-outline-warning eduborder-color addButton-autor"
+                        class="btn btn-outline-warning eduborder-color addButton-autor edu-buttonstyle"
                         onclick="duplicate()"
                       >
                         + ADICIONAR NOVA OPÇÃO DE AUTOR
@@ -318,13 +322,13 @@
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-outline-warning eduborder-color delButton"
+                    class="btn btn-outline-warning eduborder-color delButton edu-buttonstyle"
                   >
                     Excluir
                   </button>
                   <button
                     type="button"
-                    class="btn btn-outline-warning eduborder-color addButton"
+                    class="btn btn-outline-warning eduborder-color addButton edu-buttonstyle"
                   >
                     Adicionar
                   </button>
